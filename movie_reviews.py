@@ -42,13 +42,14 @@ def find_features(document):
 
 featuresets = [(find_features(rev), category) for (rev, category) in documents]
 
-training_set = featuresets[:2900]
-testing_set = featuresets[2900:]
+training_set = featuresets[:3900]
+testing_set = featuresets[3900:]
 
 # posterior = prior occurences * likelihood / evidence
 
 #classifier = nltk.NaiveBayesClassifier.train(training_set)
 
+# load
 classifier_f = open('naivebayes.pickle', 'rb')
 classifier = pickle.load(classifier_f)
 classifier_f.close()
@@ -56,6 +57,7 @@ classifier_f.close()
 print('Naive Bayes Algo accuracy:', (nltk.classify.accuracy(classifier, testing_set))*100)
 classifier.show_most_informative_features(15)
 
+# save
 #save_classifier = open('naivebayes.pickle','wb')
 #pickle.dump(classifier, save_classifier)
 #save_classifier.close()
